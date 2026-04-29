@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dream Ladders | AI Construction</title>
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --accent: #f59e0b; --text: #f8fafc; }
+        body { background: var(--bg); color: var(--text); font-family: sans-serif; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .card { background: var(--card); padding: 25px; border-radius: 15px; margin-bottom: 20px; border: 1px solid #334155; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border-radius: 8px; border: none; }
+        input { background: #0f172a; color: white; border: 1px solid #334155; box-sizing: border-box; }
+        button { background: var(--accent); font-weight: bold; cursor: pointer; }
+        #messages { height: 300px; overflow-y: auto; background: #0f172a; padding: 15px; border-radius: 10px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px; border-radius: 10px; max-width: 80%; }
+        .user { background: var(--accent); color: black; align-self: flex-end; }
+        .bot { background: #334155; align-self: flex-start; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🏗️ Dream Ladders AI</h2>
+    
+    <div class="card">
+        <h3>Get Free Estimate</h3>
+        <input id="userName" placeholder="Your Name">
+        <input id="userPhone" placeholder="WhatsApp Number">
+        <input id="userCity" placeholder="City">
+        <input id="userArea" placeholder="Plot Area (sqft)">
+        <button onclick="submitLead()">Submit Details</button>
+    </div>
+
+    <div class="card">
+        <h3>Chat with Engineering AI</h3>
+        <div id="messages"></div>
+        <div style="display:flex; gap:10px;">
+            <input id="chatInput" placeholder="Ask about costs, materials...">
+            <button style="width:80px" onclick="sendMsg()">Send</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // PASTE YOUR GOOGLE WEB APP URL HERE
+    const PROXY_URL = "https://script.google.com/macros/s/AKfycbzuDquS1n-ADC5zF8oVSPfaSOT6YSFGvmuaf4hljwzh5cNMaXHGlvBbd2NvGMHA2WSJfQ/exec";
+
+    async function submitLead() {
+        const data = {
+            type: "LEAD",
+            name: document.getElementById('userName').value,
+            phone: document.getElementById('userPhone').value,
+            city: document.getElementById('userCity').value,
+            area: document.getElementById('userArea').value
+        };
+        
+        // Note: 'no-cors' is used because Google Scripts don't return standard CORS headers
+        // Even with no-cors, the data WILL reach your Google Sheet.
+        fetch(PROXY_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: JSON.stringify(data)
+        });
+        alert("Details received! We will WhatsApp you shortly.");
+    }
+
+    async function sendMsg() {
+        const input = document.getElementById('chatInput');
+        const text = input.value.trim();
+        if(!text) return;
+
+        appendMessage(text, 'user');
+        input.value = '';
+
+        try {
+            const response = await fetch(PROXY_URL, {
+                method: 'POST',
+                body: JSON.stringify({ type: "CHAT", message: text })
+            });
+            const result = await response.json();
+            const aiText = result.candidates[0].content.parts[0].text;
+            appendMessage(aiText, 'bot');
+        } catch (e) {
+            console.error(e);
+            appendMessage("I'm connecting... try asking again in a moment.", 'bot');
+        }
+    }
+
+    function appendMessage(text, sender) {
+        const m = document.getElementById('messages');
+        const div = document.createElement('div');
+        div.className = `msg ${sender}`;
+        div.innerText = text;
+        m.appendChild(div);
+        m.scrollTop = m.scrollHeight;
+    }
+</script>
+</body>
+</html>
