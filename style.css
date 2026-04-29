@@ -1,0 +1,294 @@
+/* =========================
+   Dream Ladders AI
+   style.css
+========================= */
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg,#0f172a,#111827,#1e293b);
+  background-size:300% 300%;
+  animation:bgMove 12s ease infinite;
+  color:#ffffff;
+  line-height:1.5;
+}
+
+/* animated background */
+@keyframes bgMove{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* layout */
+.container{
+  width:100%;
+  max-width:1100px;
+  margin:auto;
+  padding:0 18px;
+}
+
+.section{
+  padding:28px 0;
+}
+
+/* header */
+.header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  backdrop-filter:blur(14px);
+  background:rgba(15,23,42,.75);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.nav{
+  min-height:74px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.logo{
+  width:56px;
+  height:56px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#f59e0b,#fbbf24);
+  color:#111827;
+  font-weight:800;
+  font-size:24px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+.brand h1{
+  font-size:22px;
+  margin-bottom:2px;
+}
+
+.tagline{
+  font-size:13px;
+  opacity:.85;
+}
+
+.nav-actions{
+  display:flex;
+  gap:8px;
+}
+
+/* hero */
+.hero{
+  padding:56px 0 24px;
+}
+
+.hero h2{
+  font-size:38px;
+  line-height:1.2;
+  max-width:700px;
+  margin-bottom:14px;
+}
+
+.hero p{
+  max-width:760px;
+  opacity:.9;
+  margin-bottom:20px;
+  font-size:17px;
+}
+
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* cards */
+.card{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.10);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  animation:fadeUp .7s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.card h3{
+  font-size:24px;
+  margin-bottom:18px;
+}
+
+/* form elements */
+input,
+select,
+textarea,
+button{
+  width:100%;
+  border:none;
+  outline:none;
+  border-radius:14px;
+  padding:14px 16px;
+  margin:8px 0;
+  font-size:15px;
+}
+
+input,
+select,
+textarea{
+  background:rgba(255,255,255,.92);
+  color:#111827;
+}
+
+textarea{
+  resize:vertical;
+}
+
+/* buttons */
+button{
+  cursor:pointer;
+  background:#f59e0b;
+  color:#111827;
+  font-weight:700;
+  transition:all .25s ease;
+}
+
+button:hover{
+  transform:translateY(-2px);
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+}
+
+.secondary{
+  background:transparent;
+  color:#ffffff;
+  border:1px solid rgba(255,255,255,.25);
+}
+
+.small-btn{
+  width:auto;
+  padding:10px 14px;
+  border-radius:10px;
+  font-size:14px;
+}
+
+/* result boxes */
+.result-box{
+  margin-top:10px;
+  padding:14px;
+  min-height:48px;
+  border-radius:14px;
+  background:rgba(0,0,0,.18);
+  border:1px solid rgba(255,255,255,.08);
+  white-space:pre-wrap;
+}
+
+/* dashboard */
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.dash-box{
+  background:rgba(255,255,255,.06);
+  border-radius:18px;
+  padding:18px;
+  text-align:center;
+}
+
+.dash-box span{
+  display:block;
+  font-size:14px;
+  opacity:.8;
+  margin-bottom:8px;
+}
+
+.dash-box strong{
+  font-size:28px;
+}
+
+/* footer */
+.footer{
+  padding:32px 0 48px;
+  text-align:center;
+  opacity:.88;
+}
+
+.footer p{
+  margin:4px 0;
+}
+
+/* mobile */
+@media (max-width:768px){
+
+  .nav{
+    flex-direction:column;
+    align-items:flex-start;
+    padding:14px 0;
+  }
+
+  .hero{
+    padding-top:34px;
+  }
+
+  .hero h2{
+    font-size:30px;
+  }
+
+  .hero p{
+    font-size:15px;
+  }
+
+  .dashboard-grid{
+    grid-template-columns:1fr;
+  }
+
+  .brand h1{
+    font-size:20px;
+  }
+}
+
+@media (max-width:480px){
+
+  .card{
+    padding:18px;
+  }
+
+  .hero h2{
+    font-size:26px;
+  }
+
+  input,
+  select,
+  textarea,
+  button{
+    padding:13px;
+  }
+}
