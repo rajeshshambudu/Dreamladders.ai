@@ -14,7 +14,7 @@ https://script.google.com/macros/s/AKfycbxxxxxxxxxxxx/exec
 */
 
 const API_BASE_URL =
-  "PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEBAPP_URL_HERE";
+  "https://script.google.com/macros/s/AKfycbxw62nY4cJ94CnIx8IakKNlnZbt_dgpc0pr1cfVnwzdRVjyxNEn-yLCrkBwJyhn5sk3ag/exec";
 
 /* =========================
    Business Settings
