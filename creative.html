@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Division - Dream Ladders</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Dream Ladders Creative</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="engineering.html">Engineering</a>
+      <a href="technology.html">Technology</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero creative">
+    <h2>Creative & Audio Production</h2>
+    <p>Music production, sound design, background scoring, and sonic branding for global clients.</p>
+  </section>
+
+  <section id="creative-services">
+    <h3>Our Services</h3>
+    <div id="service-list" class="grid"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Dream Ladders</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script>
+    fetchServices('creative').then(services => {
+      const container = document.getElementById('service-list');
+      services.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card creative';
+        card.innerHTML = `<h4>${s[0]}</h4><p>${s[1]}</p>`;
+        container.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
