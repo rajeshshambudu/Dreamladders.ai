@@ -1,251 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dream Ladders AI</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<style>
-body{
-margin:0;
-font-family:Arial,sans-serif;
-background:#0f172a;
-color:#fff;
-padding:20px;
-}
+  <title>Dream Ladders AI – Smart Construction Starts Here</title>
 
-.container{
-max-width:900px;
-margin:auto;
-}
+  <meta
+    name="description"
+    content="Dream Ladders AI offers smart house construction estimates, civil engineering support, planning guidance and project consultation."
+  />
 
-.card{
-background:#1e293b;
-padding:25px;
-border-radius:16px;
-margin-bottom:20px;
-border:1px solid #334155;
-}
+  <meta
+    name="keywords"
+    content="construction estimate, house cost calculator, civil engineer, Dream Ladders AI, Telangana construction"
+  />
 
-h1,h2{
-margin-top:0;
-}
+  <meta property="og:title" content="Dream Ladders AI" />
+  <meta
+    property="og:description"
+    content="Smart Construction Starts Here"
+  />
+  <meta property="og:type" content="website" />
 
-input,select,button{
-width:100%;
-padding:12px;
-margin:8px 0;
-border-radius:10px;
-border:none;
-font-size:16px;
-}
-
-input,select{
-background:#0f172a;
-color:#fff;
-border:1px solid #334155;
-}
-
-button{
-background:#f59e0b;
-font-weight:bold;
-cursor:pointer;
-}
-
-#messages{
-height:350px;
-overflow-y:auto;
-background:#0f172a;
-padding:15px;
-border-radius:12px;
-display:flex;
-flex-direction:column;
-gap:10px;
-}
-
-.msg{
-padding:10px;
-border-radius:10px;
-max-width:80%;
-line-height:1.5;
-white-space:pre-wrap;
-}
-
-.user{
-background:#f59e0b;
-color:#000;
-align-self:flex-end;
-}
-
-.bot{
-background:#334155;
-align-self:flex-start;
-}
-
-.row{
-display:flex;
-gap:10px;
-}
-
-.row input{
-margin:0;
-}
-
-#result{
-margin-top:10px;
-line-height:1.8;
-}
-</style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
-<div class="container">
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">DL</div>
+        <div>
+          <h1 id="brandTitle">Dream Ladders AI</h1>
+          <p class="tagline">Smart Construction Starts Here</p>
+        </div>
+      </div>
 
-<div class="card">
-<h1>🏗 Dream Ladders AI</h1>
-<p>Instant house cost estimate + AI civil engineering support</p>
-</div>
+      <div class="nav-actions">
+        <button class="small-btn" onclick="setLanguage('en')">EN</button>
+        <button class="small-btn" onclick="setLanguage('te')">తెలుగు</button>
+      </div>
+    </div>
+  </header>
 
-<div class="card">
-<h2>Free Estimate</h2>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h2 id="heroTitle">Build Your Dream Home with AI Precision</h2>
+      <p id="heroText">
+        Instant estimates, expert planning, lead support and trusted civil engineering guidance.
+      </p>
 
-<input id="name" placeholder="Your Name">
-<input id="phone" placeholder="WhatsApp Number">
-<input id="city" placeholder="City">
-<input id="sqft" type="number" placeholder="Plot Area (sqft)">
+      <div class="hero-buttons">
+        <button onclick="openWhatsApp()">WhatsApp Us</button>
+        <button class="secondary" onclick="scrollToEstimator()">Get Estimate</button>
+      </div>
+    </div>
+  </section>
 
-<select id="finish">
-<option value="2200">Standard</option>
-<option value="2600">Premium</option>
-<option value="3200">Luxury</option>
-</select>
+  <!-- Estimator -->
+  <section class="section">
+    <div class="container card" id="estimatorSection">
+      <h3 id="estimatorHeading">AI Construction Estimator</h3>
 
-<button onclick="calculateEstimate()">Get Estimate</button>
+      <input type="text" id="city" placeholder="City" />
+      <input type="number" id="area" placeholder="Builtup Area (sqft)" />
+      <input type="number" id="floors" placeholder="Floors" />
 
-<div id="result">Your estimate will appear here.</div>
-</div>
+      <select id="quality">
+        <option value="standard">Standard</option>
+        <option value="premium">Premium</option>
+        <option value="luxury">Luxury</option>
+      </select>
 
-<div class="card">
-<h2>Chat with Engineering AI</h2>
+      <button onclick="estimateCost()">Estimate Cost</button>
 
-<div id="messages"></div>
+      <div id="result" class="result-box"></div>
+    </div>
+  </section>
 
-<div class="row" style="margin-top:10px;">
-<input id="chatInput" placeholder="Ask about cost, slab, steel...">
-<button style="width:110px;" onclick="sendMsg()">Send</button>
-</div>
+  <!-- AI Chat -->
+  <section class="section">
+    <div class="container card">
+      <h3 id="chatHeading">Ask Dream Ladders AI</h3>
 
-</div>
+      <textarea
+        id="chat"
+        rows="5"
+        placeholder="Ask about house construction, cost, planning..."
+      ></textarea>
 
-</div>
+      <button onclick="askAI()">Ask AI</button>
 
-<script>
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx5xYy6PwwwP31-F_YJISEu87kJxfJYYSasD-uCJAdVrhoRkM2xSRuguS_vJhMY06UUgA/exec";
+      <div id="reply" class="result-box"></div>
+    </div>
+  </section>
 
-/******** LEAD + ESTIMATE ********/
-async function calculateEstimate(){
+  <!-- Lead Form -->
+  <section class="section">
+    <div class="container card">
+      <h3 id="leadHeading">Get Free Consultation</h3>
 
-const name = document.getElementById("name").value.trim();
-const phone = document.getElementById("phone").value.trim();
-const city = document.getElementById("city").value.trim();
-const sqft = Number(document.getElementById("sqft").value);
-const rate = Number(document.getElementById("finish").value);
-const finish = document.getElementById("finish").selectedOptions[0].text;
+      <input type="text" id="name" placeholder="Your Name" />
+      <input type="text" id="phone" placeholder="Phone Number" />
+      <input type="email" id="email" placeholder="Email Address" />
+      <input type="text" id="leadCity" placeholder="City" />
 
-if(!name || !phone || !city || !sqft){
-alert("Fill all fields");
-return;
-}
+      <textarea
+        id="requirement"
+        rows="4"
+        placeholder="Tell us your requirement"
+      ></textarea>
 
-const total = sqft * rate;
+      <button onclick="submitLead()">Submit Lead</button>
 
-document.getElementById("result").innerHTML =
-"<b>Total Estimate:</b> ₹" +
-total.toLocaleString("en-IN");
+      <div id="leadMessage" class="result-box"></div>
+    </div>
+  </section>
 
-await fetch(SCRIPT_URL,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-type:"LEAD",
-name,
-phone,
-city,
-sqft,
-finish,
-estimate:total
-})
-});
-}
+  <!-- Dashboard -->
+  <section class="section">
+    <div class="container card">
+      <h3>Founder Dashboard</h3>
 
-/******** CHAT ********/
-async function sendMsg(){
+      <div class="dashboard-grid">
+        <div class="dash-box">
+          <span>Today's Leads</span>
+          <strong id="todayLeads">0</strong>
+        </div>
 
-const input = document.getElementById("chatInput");
-const text = input.value.trim();
+        <div class="dash-box">
+          <span>Hot Leads</span>
+          <strong id="hotLeads">0</strong>
+        </div>
 
-if(!text) return;
+        <div class="dash-box">
+          <span>Top City</span>
+          <strong id="topCity">--</strong>
+        </div>
+      </div>
+    </div>
+  </section>
 
-appendMsg(text,"user");
-input.value="";
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Dream Ladders AI</p>
+      <p>WhatsApp: 7093218658 | Email: dreamladdersservices@gmail.com</p>
+    </div>
+  </footer>
 
-appendMsg("Typing...","bot");
-
-try{
-
-const res = await fetch(SCRIPT_URL,{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-type:"AI_CHAT",
-message:text
-})
-});
-
-const data = await res.json();
-
-document.querySelector(".bot:last-child").remove();
-
-appendMsg(data.reply || "Try again","bot");
-
-/* Save log */
-fetch(SCRIPT_URL,{
-method:"POST",
-mode:"no-cors",
-body:JSON.stringify({
-type:"CHAT",
-message:text,
-reply:data.reply
-})
-});
-
-}catch(err){
-
-document.querySelector(".bot:last-child").remove();
-appendMsg("Connection issue.","bot");
-
-}
-}
-
-function appendMsg(text,type){
-
-const box = document.getElementById("messages");
-
-const div = document.createElement("div");
-div.className = "msg " + type;
-div.innerText = text;
-
-box.appendChild(div);
-box.scrollTop = box.scrollHeight;
-}
-
-document.getElementById("chatInput").addEventListener("keydown",function(e){
-if(e.key==="Enter") sendMsg();
-});
-</script>
-
+  <script src="config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
