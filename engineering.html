@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Engineering Division - Dream Ladders</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>Dream Ladders Engineering</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="technology.html">Technology</a>
+      <a href="creative.html">Creative</a>
+      <a href="services.html">Services</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="careers.html">Careers</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero engineering">
+    <h2>Engineering & Infrastructure</h2>
+    <p>Precision, innovation, and sustainable development across civil engineering, surveying, and design.</p>
+  </section>
+
+  <section id="engineering-services">
+    <h3>Our Services</h3>
+    <div id="service-list" class="grid"></div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 Dream Ladders</p>
+  </footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/chatbot.js"></script>
+  <script>
+    fetchServices('engineering').then(services => {
+      const container = document.getElementById('service-list');
+      services.forEach(s => {
+        const card = document.createElement('div');
+        card.className = 'card engineering';
+        card.innerHTML = `<h4>${s[0]}</h4><p>${s[1]}</p>`;
+        container.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>
