@@ -21,7 +21,7 @@ function doPost(e) {
     const options = {
       method: "post",
       headers: {
-        "Authorization": "Bearer YOUR_GEMINI_API_KEY",
+        "Authorization": "AIzaSyDnpesDj6Btq1K7DdMYblijEiFE9l5J5sY",
         "Content-Type": "application/json"
       },
       payload: JSON.stringify({
