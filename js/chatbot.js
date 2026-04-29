@@ -26,7 +26,7 @@ if (chatSend) {
     const context = getDivisionContext();
 
     // Call backend proxy
-    const response = await fetch("https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=askGemini", {
+    const response = await fetch("https://script.google.com/macros/s/AKfycbxHHLkh-DaL46YVrk_ZbB02Uy1oaY1VhWNO6jYSBqy6SqZGp_VZE_30vRPeHAjj7fuLjQ/exec", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: userText, context })
